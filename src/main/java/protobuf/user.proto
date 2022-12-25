@@ -1,0 +1,53 @@
+syntax = "proto3";
+package profile;
+option java_package = "com.undertone.user";
+option java_multiple_files = true;
+
+
+message UserResponse {
+  bool bot = 1;
+  map<int32, int32> profile_to_epoch = 2;
+  map<int32, string> vendor_to_cookie = 3;
+  repeated History historyEvents = 4;
+}
+
+message ProfileEpochRequest {
+  string user_id = 1;
+  int32 ttl = 2;
+  map<int32, int32> profile_to_epoch = 3;
+}
+
+message ProfileGraphRequest {
+  string user_id = 1;
+  int32 ttl = 2;
+  repeated string graph = 3;
+}
+
+message HistoryRequest {
+  string user_id = 1;
+  int32 ttl = 2;
+  History history = 3;
+}
+
+message History {
+  int32 ad_id = 1;
+  int32 publisher_id = 2;
+  string placement_type = 3;
+  int64 ts = 4;
+}
+
+message BotRequest {
+  string user_id = 1;
+  int32 ttl = 2;
+}
+
+message VendorMappingRequest {
+  string user_id = 1;
+  int32 ttl = 2;
+  int32 vendor_id = 3;
+  string vendor_cookie = 4;
+}
+
+message GeneralResponse {
+  bool res = 1;
+}
