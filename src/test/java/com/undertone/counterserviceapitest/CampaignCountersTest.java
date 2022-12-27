@@ -1,7 +1,5 @@
 package com.undertone.counterserviceapitest;
 
-//import com.google.protobuf.Timestamp;
-
 import com.undertone.counter.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +19,6 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 @Slf4j
 @SpringBootTest
 public class CampaignCountersTest extends CounterTest {
-
 
     @Test
     public void campaignCountersTest() throws IOException, InterruptedException {

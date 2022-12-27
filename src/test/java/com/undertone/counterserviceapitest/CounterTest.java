@@ -21,14 +21,13 @@ public abstract class CounterTest {
 
     protected static final int REQUEST_TIMEOUT_SEC = 3;
 
-    protected static final String SERVER_URL = (System.getenv("SERVER_URL") != null) ? System.getenv("SERVER_URL") : "http://127.0.0.1:8823";
-//    protected static final String SERVER_URL = "http://ramplift-v2-i-counter-service-us-east-1-k8s-internal.ramp-ut.io";
-
-    @Autowired
-    protected DateTimeService dateTimeService;
+    //    protected static final String SERVER_URL = (System.getenv("SERVER_URL") != null) ? System.getenv("SERVER_URL") : "http://127.0.0.1:8823";
+    protected static final String SERVER_URL = "http://ramplift-v2-i-counter-service-us-east-1-k8s-internal.ramp-ut.io";
 
     protected static final HttpClient client = HttpClient.newHttpClient();
 
+    @Autowired
+    protected DateTimeService dateTimeService;
 
     protected CampaignCounterResponse getCampaignCounterResponse(int campaignId) throws IOException, InterruptedException {
 
