@@ -1,0 +1,70 @@
+syntax = "proto3";
+package profile;
+option java_package = "com.undertone.counter";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.EnumOptions {
+  string minute_format_str = 51234;
+  string hour_format_str= 51235;
+  string day_format_str = 51236;
+}
+
+message CampaignCounterRequest {
+  int32 campaign_id = 1;
+  EventType event_type = 2;
+  PeriodType period_type = 3;
+  string timestamp = 4;
+}
+
+message CampaignCounter {
+  EventType event_type = 1;
+  PeriodType period_type = 2;
+  string timestamp = 3;
+  int32 event_counter = 4;
+}
+
+message CampaignCounterResponse {
+  repeated CampaignCounter campaignCounters = 1;
+}
+
+message PublisherCounterRequest {
+  int32 publisher_id = 1;
+  int32 ad_unit_id = 2;
+  int64 day_value = 3;
+}
+
+message PublisherCounter {
+  int32 ad_unit_id = 1;
+  int64 day_value = 2;
+  int64 counterValue = 3;
+}
+
+message PublisherCounterResponse {
+  repeated PublisherCounter publisherCounters = 1;
+}
+
+enum EventType {
+  IMPRESSION = 0;
+  INTERACTION_VIDEO_COMPLETE = 1;
+  CLICK = 2;
+  RESPONSE = 3;
+  INTERACTION = 4;
+}
+
+enum PeriodType {
+  option (minute_format_str) = "dd/MM/yyyy, HH:mm";
+  option (hour_format_str) = "dd/MM/yyyy, HH:00";
+  option (day_format_str) = "dd/MM/yyyy";
+
+  MINUTE = 0;
+  HOUR = 1;
+  DAY = 2;
+  LIFETIME = 3;
+}
+
+message GeneralResponse {
+  bool res = 1;
+}

@@ -8,18 +8,30 @@
 		<version>3.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.undertone</groupId>
 	<artifactId>counter-service-api-test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>counter-service-api-test</name>
 	<description>API tests for counter-service</description>
+
 	<properties>
 		<java.version>19</java.version>
+		<protobuf-java-format.version>1.4</protobuf-java-format.version>
+		<protobuf-java.version>3.21.9</protobuf-java.version>
+		<protoc-jar-maven-plugin>3.8.0</protoc-jar-maven-plugin>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -32,6 +44,25 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>${protobuf-java.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.protobuf-java-format</groupId>
+			<artifactId>protobuf-java-format</artifactId>
+			<version>${protobuf-java-format.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java-util</artifactId>
+			<version>${protobuf-java.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -48,6 +79,33 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.github.os72</groupId>
+				<artifactId>protoc-jar-maven-plugin</artifactId>
+				<version>3.11.4</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<protocVersion>3.11.0</protocVersion>
+					<addSources>main</addSources>
+					<includeMavenTypes>direct</includeMavenTypes>
+					<includeDirectories>
+						<include>src/main/protobuf</include>
+					</includeDirectories>
+					<inputDirectories>
+						<include>src/main/protobuf</include>
+					</inputDirectories>
+				</configuration>
+			</plugin>
+
+
 		</plugins>
 	</build>
 
